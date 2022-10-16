@@ -1,9 +1,15 @@
 import { Error, Loader, SongCard } from "../components";
 import { genres } from "../assets/constants";
-
+import { usegetTopChartsQuery } from "../redux/services/shazamCore";
 const Discover = () => {
+  const { data, isfetching, error } = usegetTopChartsQuery();
   let genreTitle = "Pop";
   let songs = [0, 1, 2, 3, 4, 5, 6];
+  console.log(data);
+
+  if (isfetching) return <Loader />;
+  else if (error) return <Error />;
+
   return (
     <div className="flex flex-col">
       {/* Flexbox */}
